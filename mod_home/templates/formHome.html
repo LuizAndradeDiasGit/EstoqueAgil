@@ -3,4 +3,7 @@
 {% block content %}
 <h1>Home</h1>
 <p>Home - Luiz</p>
+{% if 'usuario' in session :%}
+    Bem-Vindo <b>{{session['usuario']}}</b>
+  {% endif %}
 {% endblock %}

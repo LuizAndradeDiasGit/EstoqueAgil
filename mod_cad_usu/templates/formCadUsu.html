@@ -1,6 +1,50 @@
 {% extends "base.html" %}
 {% block title %}Cadastro de Usuários{% endblock %}
 {% block content %}
-<h1>Cadastro de Usuários</h1>
-<p>Cadastro de Usuários</p>
-{% endblock %}
+
+<form name="usuario" id="addUsuario" method="POST"
+    action="{{ url_for('cadUsu.addUsuario' if usuario.id_usuario == 0 else 'cadUsu.editUsuario') }}" class="row g-3">
+
+    <h1>{{ 'Novo Usuario' if usuario.id_usuario == 0 else 'Editar Usuário' }}</h1>
+
+Código: <input readonly value="{{ usuario.id_usuario }}" type="text" name="id_usuario" id="id_usuario"><br><br>
+Nome Usuario: <input value="{{ usuario.nome }}" type="text" name="nome" id="nome" autofocus=""><br><br>
+Matrícula: <input value="{{ usuario.matricula }}" type="number" name="matricula" id="matricula"><br><br>
+CPF: <input value="{{ usuario.cpf }}" type="number" name="cpf" id="cpf"><br><br>
+Grupo: <select name="grupo" id="grupo">
+    <option selected {{ usuario.grupo }}>{{ usuario.grupo }}</option>
+</select><br><br>
+Cargo: <input value="{{ usuario.cargo }}" type="text" name="cargo" id="cargo"><br><br>
+CEP: <input value="{{ usuario.cep }}" type="number" name="cep" id="cep"><br><br>
+País: <input value="{{ usuario.pais }}" type="text" name="pais" id="pais"><br><br>
+Estado: <select name="uf" id="uf">
+    <option selected {{ usuario.uf }}>{{ usuario.uf }}</option>
+    <option value="SC">SC</option>
+                <option value="PR">PR</option>
+                <option value="RJ">RJ</option>
+                <option value="RS">RS</option>
+                <option value="SP">SP</option>
+</select><br><br>
+Cidade: <input value="{{ usuario.cidade }}" type="text" name="cidade" id="cidade"><br><br>
+Bairro: <input value="{{ usuario.bairro }}" type="text" name="bairro" id="bairro"><br><br>
+Rua: <input value="{{ usuario.rua }}" type="text" name="rua" id="rua"><br><br>
+Número: <input value="{{ usuario.numero }}" type="number" name="numero" id="numero"><br><br>
+Complemento: <input value="{{ usuario.complemento }}" type="text" name="complemento" id="complemento"><br><br>
+Telefone: <input value="{{ usuario.telefone }}" type="number" name="telefone" id="telefone" ><br><br>
+Data de Nascimento: <input value="{{ usuario.data_nasc }}" type="date" name="data_nasc" id="data_nasc"><br><br>
+Sexo: <select name="sexo" id="sexo">
+    <option selected {{ usuario.sexo }}>{{ usuario.sexo }}</option>
+    <option value="M">M</option>
+    <option value="F">F</option>
+</select><br><br>
+<tr>
+    Email: <input value="{{ usuario.email }}" type="email" name="email" id="email">
+    Senha: <input value="{{ usuario.senha }}" type="password" name="senha" id="senha">
+
+
+    <div class='col-12'>
+        <button type='submit' name='salvaUsuarioDB' id='salvaUsuarioDB' class="btn btn-outline-success btn-lg"><i
+                class='fas fa-save'></i> Salvar</button>
+    </div>
+</form>
+    {% endblock %}

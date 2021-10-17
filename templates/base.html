@@ -16,18 +16,32 @@
 <li><a href="{{ url_for('cadTransp.rotaCadTransp') }}">Cadastro de Transportadoras</a></li>
 <li><a href="{{ url_for('cadUsu.rotaCadUsu') }}">Cadastro de Usuários</a></li>
 <li><a href="{{ url_for('envios.rotaEnvios') }}">Envios</a></li>
-<li><a href="{{ url_for('login.rotaLogin') }}">Login</a></li>
+<li><a href="{{ url_for('login.login') }}">Login</a></li>
 <li><a href="{{ url_for('pacotes.rotaPacotes') }}">Pacotes</a></li>
 <li><a href="{{ url_for('relatorios.rotaRelatorios') }}">Relatórios</a></li>
+<li><a href="{{ url_for('testes.rotaTestes') }}">Testes</a></li>
 
 </ul>
 {% endblock %}
 <div class="container">
-{% block content %}{% endblock %}
+    <div class="container-fluid mt-3">
+        {% if request.args.get('mensagem'): %}
+        <h3>{{ request.args.get('mensagem') }}</h3>
+        <br>
+        {% endif %}
+        {% if request.args.get('mensagem_exception'): %}
+        <h3>{{ request.args.get('mensagem_exception') }}</h3>
+        <br>
+        {% endif %}
+        {% block content %}{% endblock %}
+        <br><br><br>
+    </div>
 {% block footer %}
-<div class="col-8">&copy; Copyright 2021 by <a href="http://127.0.0.1:5000/">Luizão</a>.</div>
+<div class="col-8">&copy; Copyright 2021 by <a href="http://127.0.0.1:5000/">Luiz</a>.</div>
 {% endblock %}
 </div>
+
+    
 {% block js %}
 <script src="{{ url_for('static', filename='bootstrap-5.1.0-dist/js/bootstrap.min.js') }}"></script>
 {% endblock %}
