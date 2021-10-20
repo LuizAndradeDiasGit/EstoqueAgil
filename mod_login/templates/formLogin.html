@@ -5,19 +5,29 @@
 
 <!--#<form action="{{ url_for('login.validaLogin') }}" method="POST"></form>-->
 <form action="{{ url_for('login.validaLogin') }}" method="POST">
-    <div class="form-group">
-        <label for="formGroupExampleInput">Usuário</label>
-        <input type="text" class="form-control" name="usuario" placeholder="Usuário" required value="abc" autofocus>
-      </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Senha</label>
-      <input type="password" class="form-control" name="senha" placeholder="Senha" required value="abc" autofocus>
-    </div>
-    <button type="submit" class="btn btn-primary">Entrar</button>
-</form>
-  {% if request.args.get('falhaLogin') == '1' :%}
-  <div class="alert alert-danger" role="alert">
-    Usuário ou senha inválidos!
+  <div class="form-group">
+    <label for="formGroupExampleInput">Usuário</label>
+    <input type="text" class="form-control" name="usuario" placeholder="Usuário"  autofocus>
   </div>
-  {% endif %}
- {% endblock %}
+  <div class="form-group">
+    <label for="exampleInputPassword1">Senha</label>
+    <input type="password" class="form-control" name="senha" placeholder="Senha"  autofocus>
+  </div>
+  <button type="submit" class="btn btn-primary">Entrar</button>
+</form>
+{% if request.args.get('falhaLogin') == '1' :%}
+<div class="alert alert-danger" role="alert">
+  Usuário ou senha inválidos!
+</div>
+{% endif %}
+{% if request.args.get('falhaSessao') == '1': %}
+Falha de Sessão! Realize seu login!
+
+{% endif %}
+{% if request.args.get('mensagem_exception'): %}
+{{ request.args.get('mensagem') }}
+<br>
+{{ request.args.get('mensagem_exception') }}
+
+{% endif %}
+{% endblock %}

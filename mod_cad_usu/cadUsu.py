@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 #from mod_login.login import validaSessao
 from mod_cad_usu.cadUsuBD import Usuarios
+from funcoes import Funcoes
 
 bp_cad_usu = Blueprint('cadUsu', __name__, url_prefix="/cadUsu", template_folder='templates')
 
@@ -62,7 +63,7 @@ def addUsuario():
         usuario.data_nasc   = request.form['data_nasc']
         usuario.sexo        = request.form['sexo']
         usuario.email       = request.form['email']
-        usuario.senha       = request.form['senha']
+        usuario.senha       = Funcoes.cifraSenha(request.form['senha'])
 
         _msg = usuario.insert()
         return redirect(url_for('cadUsu.rotaCadUsu', mensagem=_msg))
@@ -94,7 +95,7 @@ def editUsuario():
             usuario.data_nasc   = request.form['data_nasc']
             usuario.sexo        = request.form['sexo']
             usuario.email       = request.form['email']
-            usuario.senha       = request.form['senha']
+            usuario.senha       = Funcoes.cifraSenha(request.form['senha'])
             _msg = usuario.update()
             return redirect(url_for('cadUsu.rotaCadUsu', mensagem=_msg))
         except Exception as e:

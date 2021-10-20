@@ -110,7 +110,7 @@ class Usuarios(object):
             if banco:
                 banco.conexao.close()
 
-############################
+############################ nm
     def update(self):
         banco = None
         c = None
@@ -158,6 +158,29 @@ class Usuarios(object):
                 c.close()
             if banco:
                 banco.conexao.close()
+#########################
+    def selectLogin(self):
+        banco = None
+        c = None
+        try:
+            banco = Banco()
+            c = banco.conexao.cursor()
+            _sql = "select id_usuario,nome,matricula,grupo from tb_usuarios where matricula = %s and senha = %s"
+            _sql_data = (self.matricula, self.senha,)
+            c.execute(_sql, _sql_data)
+            for linha in c:
+                self.id_usuario = linha[0]
+                self.nome = linha[1]
+                self.matricula = linha[2]
+                self.grupo = linha[3]
+            return "Busca feita com sucesso!"
+        except Exception as e:
+            raise Exception('Erro na busca!', str(e))
+        finally:
+            if c:
+                c.close()
+            if banco:
+                banco.conexao.close()   
 
 
 

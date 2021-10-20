@@ -1,49 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-<title>{% block title %}{% endblock %} - AbcBolinhas</title>
-{% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.1.0-dist/css/bootstrap.min.css') }}">
-{% endblock %}
-</head>
-<body>
-{% block menu %}
-<ul>
-<li><a href="{{ url_for('home.rotaHome') }}">Home</a></li>
-<li><a href="{{ url_for('cadForn.rotaCadForn') }}">Cadastro de Fornecedores</a></li>
-<li><a href="{{ url_for('cadTransp.rotaCadTransp') }}">Cadastro de Transportadoras</a></li>
-<li><a href="{{ url_for('cadUsu.rotaCadUsu') }}">Cadastro de Usuários</a></li>
-<li><a href="{{ url_for('envios.rotaEnvios') }}">Envios</a></li>
-<li><a href="{{ url_for('login.login') }}">Login</a></li>
-<li><a href="{{ url_for('pacotes.rotaPacotes') }}">Pacotes</a></li>
-<li><a href="{{ url_for('relatorios.rotaRelatorios') }}">Relatórios</a></li>
-<li><a href="{{ url_for('testes.rotaTestes') }}">Testes</a></li>
-
-</ul>
-{% endblock %}
-<div class="container">
-    <div class="container-fluid mt-3">
-        {% if request.args.get('mensagem'): %}
-        <h3>{{ request.args.get('mensagem') }}</h3>
-        <br>
-        {% endif %}
-        {% if request.args.get('mensagem_exception'): %}
-        <h3>{{ request.args.get('mensagem_exception') }}</h3>
-        <br>
-        {% endif %}
-        {% block content %}{% endblock %}
-        <br><br><br>
-    </div>
-{% block footer %}
-<div class="col-8">&copy; Copyright 2021 by <a href="http://127.0.0.1:5000/">Luiz</a>.</div>
-{% endblock %}
-</div>
-
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>{% block title %}{% endblock %} - AbcBolinhas</title>
+    {% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.1.0-dist/css/bootstrap.min.css') }}">
+    <style>
+    .form-control:invalid{
+    border: 1px solid #CC0000;
+}
+    </style>
     
-{% block js %}
-<script src="{{ url_for('static', filename='bootstrap-5.1.0-dist/js/bootstrap.min.js') }}"></script>
-{% endblock %}
+    {% endblock %}
+</head>
+
+<body>
+    {% block menu %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.1.0-dist/css/bootstrap.min.css') }}">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="navbar-brand" href="#">EstoqueAgil</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar"
+            aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="textoNavbar">
+            <ul class="navbar-nav mr-auto nav-justified">
+                <li class="nav-item active">
+                    <li><a class="nav-link" href="{{ url_for('home.rotaHome') }}">Home</a></li>
+                    <li><a class="nav-link" href="{{ url_for('cadForn.rotaCadForn') }}">Fornecedores </a></li>
+                    <li><a class="nav-link" href="{{ url_for('cadTransp.rotaCadTransp') }}">Transportadoras </a></li>
+                    <li><a class="nav-link" href="{{ url_for('cadUsu.rotaCadUsu') }}">Usuários </a></li>
+                    <li><a class="nav-link" href="{{ url_for('envios.rotaEnvios') }}">Envios </a></li>
+                    <li><a class="nav-link" href="{{ url_for('pacotes.rotaPacotes') }}">Pacotes </a></li>
+                    <li> <a class="nav-link" href="{{ url_for('relatorios.rotaRelatorios') }}">Relatórios </a></li>
+                    <li><a class="nav-link" href="{{ url_for('testes.rotaTestes') }}">(Testes) </a></li>
+                </li>
+            </ul>
+           
+
+               
+                    
+                                    
+        </div>
+    </nav>
+</div>
+    {% endblock %}
+    <div class="container">
+        <div class="container-fluid mt-3">
+            {% if request.args.get('mensagem'): %}
+            <h3>{{ request.args.get('mensagem') }}</h3>
+            <br>
+            {% endif %}
+            {% if request.args.get('mensagem_exception'): %}
+            <h3>{{ request.args.get('mensagem_exception') }}</h3>
+            <br>
+            {% endif %}
+            {% block content %}{% endblock %}
+            <br><br><br>
+        </div>
+        {% block footer %}
+        <div class="col-8">&copy; Copyright 2021 by <a href="http://127.0.0.1:5000/">Luiz</a>.</div>
+        {% endblock %}
+    </div>
+
+
+    {% block js %}
+    <script src="{{ url_for('static', filename='bootstrap-5.1.0-dist/js/bootstrap.min.js') }}"> </script>
+    <script src="{{ url_for('static', filename='jquery.maskedinput.js') }}"></script>
+    <script>
+        $("#cep").mask("99.999.999");
+       
+    </script>
+    
+   
+    
+    {% endblock %}
 </body>
+
 </html>

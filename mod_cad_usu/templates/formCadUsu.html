@@ -8,16 +8,16 @@
     <h1>{{ 'Novo Usuario' if usuario.id_usuario == 0 else 'Editar Usuário' }}</h1>
 
 Código: <input readonly value="{{ usuario.id_usuario }}" type="text" name="id_usuario" id="id_usuario"><br><br>
-Nome Usuario: <input value="{{ usuario.nome }}" type="text" name="nome" id="nome" autofocus=""><br><br>
-Matrícula: <input value="{{ usuario.matricula }}" type="number" name="matricula" id="matricula"><br><br>
-CPF: <input value="{{ usuario.cpf }}" type="number" name="cpf" id="cpf"><br><br>
-Grupo: <select name="grupo" id="grupo">
+Nome Usuario: <input value="{{ usuario.nome }}" class="form-control" type="text" name="nome" id="nome" autofocus="" required><br><br>
+Matrícula: <input class="form-control"  value="{{ usuario.matricula }}" type="number" name="matricula" id="matricula" required><br><br>
+CPF: <input class="form-control" value="{{ usuario.cpf }}" type="text" name="cpf" id="cpf" placeholder="000.000.000-00"  pattern=" \ d {3} \. \ d {3} \. \ d {3} - \ d {2} " required ><br><br>
+Grupo: <select name="grupo" id="grupo" required>
     <option selected {{ usuario.grupo }}>{{ usuario.grupo }}</option>
 </select><br><br>
-Cargo: <input value="{{ usuario.cargo }}" type="text" name="cargo" id="cargo"><br><br>
-CEP: <input value="{{ usuario.cep }}" type="number" name="cep" id="cep"><br><br>
-País: <input value="{{ usuario.pais }}" type="text" name="pais" id="pais"><br><br>
-Estado: <select name="uf" id="uf">
+Cargo: <input class="form-control" value="{{ usuario.cargo }}" type="text" name="cargo" id="cargo" required><br><br>
+CEP: <input class="form-control" value="{{ usuario.cep }}" type="text" name="cep" id="cep" placeholder="00.000-00" pattern="\ d {2} \.\d{3}-\d{3}" required><br><br> <!--pattern="\ d {2} \.\d{3}-\d{3}"-->
+País: <input class="form-control" value="{{ usuario.pais }}" type="text" name="pais" id="pais" required><br><br>
+Estado: <select name="uf" id="uf" class="form-control" required>
     <option selected {{ usuario.uf }}>{{ usuario.uf }}</option>
     <option value="SC">SC</option>
                 <option value="PR">PR</option>
@@ -25,21 +25,21 @@ Estado: <select name="uf" id="uf">
                 <option value="RS">RS</option>
                 <option value="SP">SP</option>
 </select><br><br>
-Cidade: <input value="{{ usuario.cidade }}" type="text" name="cidade" id="cidade"><br><br>
-Bairro: <input value="{{ usuario.bairro }}" type="text" name="bairro" id="bairro"><br><br>
-Rua: <input value="{{ usuario.rua }}" type="text" name="rua" id="rua"><br><br>
-Número: <input value="{{ usuario.numero }}" type="number" name="numero" id="numero"><br><br>
-Complemento: <input value="{{ usuario.complemento }}" type="text" name="complemento" id="complemento"><br><br>
-Telefone: <input value="{{ usuario.telefone }}" type="number" name="telefone" id="telefone" ><br><br>
-Data de Nascimento: <input value="{{ usuario.data_nasc }}" type="date" name="data_nasc" id="data_nasc"><br><br>
-Sexo: <select name="sexo" id="sexo">
+Cidade: <input class="form-control" value="{{ usuario.cidade }}" type="text" name="cidade" id="cidade" required><br><br>
+Bairro: <input class="form-control" value="{{ usuario.bairro }}" type="text" name="bairro" id="bairro" required><br><br>
+Rua: <input class="form-control" value="{{ usuario.rua }}" type="text" name="rua" id="rua" required><br><br>
+Número: <input class="form-control" value="{{ usuario.numero }}" type="number" name="numero" id="numero" required><br><br>
+Complemento: <input class="form-control" value="{{ usuario.complemento }}" type="text" name="complemento" id="complemento" required><br><br>
+Telefone: <input class="form-control" value="{{ usuario.telefone }}" type="tel" maxlength="15" name="telefone" id="telefone" placeholder="(00) 0 0000-0000" required ><br><br>
+Data de Nascimento: <input class="form-control" value="{{ usuario.data_nasc }}" type="date" name="data_nasc" id="data_nasc" required><br><br>
+Sexo: <select name="sexo" id="sexo" required>
     <option selected {{ usuario.sexo }}>{{ usuario.sexo }}</option>
     <option value="M">M</option>
     <option value="F">F</option>
 </select><br><br>
 <tr>
-    Email: <input value="{{ usuario.email }}" type="email" name="email" id="email">
-    Senha: <input value="{{ usuario.senha }}" type="password" name="senha" id="senha">
+    Email: <input class="form-control" value="{{ usuario.email }}" type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+    Senha: <input class="form-control" value="{{ usuario.senha }}" type="password" name="senha" id="senha" required>
 
 
     <div class='col-12'>
