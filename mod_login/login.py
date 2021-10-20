@@ -31,6 +31,6 @@ def validaLogin():
 # retorna para a tela de login
       return redirect(url_for('login.login', falhaLogin=1))
   except Exception as e:
-    _msg, _msg_exception = e.args
+    _msg, _msg_exception = e.args 
     return redirect(url_for('login.login', mensagem=_msg, mensagem_exception=_msg_exception))
  

@@ -105,7 +105,7 @@ def editUsuario():
 @bp_cad_usu.route('/deleteUsuario', methods=['POST'])
 #@validaSessao
 def deleteUsuario():
-    _msg = ""
+    _msg = "" 
     try:
         usuario = Usuarios()
         usuario.id_usuario = request.form['id_usuario']

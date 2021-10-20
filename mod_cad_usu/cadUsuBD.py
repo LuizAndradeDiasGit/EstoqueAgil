@@ -11,7 +11,7 @@ class Usuarios(object):
             self.cargo = cargo
             self.cep = cep
             self.pais = pais
-            self.uf = uf
+            self.uf = uf 
             self.cidade = cidade
             self.bairro = bairro
             self.rua = rua
