@@ -13,7 +13,7 @@
                 Novo Usuário</button>
         </div>
     </div>
-</form>
+</form> 
 <br>
 
 <div class="table-responsive">
@@ -65,19 +65,23 @@
                 <td>
                     <form action="{{ url_for('cadUsu.formEditUsuario') }}" method="POST" name="editUsuario{{ row[0] }}">
                         <input type="hidden" name="id_usuario" value="{{ row[0] }}">
-                        <button type="submit" name="formEditUsuario"> Editar <i class="fas fa-edit"></i></button>
+                        <button type="submit" name="formEditUsuario" class="btn"> Editar <i class="fas fa-edit"></i></button>
                     </form>
                 </td>
                 <td>
                     <form action="{{ url_for('cadUsu.deleteUsuario') }}" method="POST" name="deleteUsuario{{ row[0] }}">
                         <input type="hidden" name="id_usuario" value="{{ row[0] }}">
-                        <button type="submit" name="formDeleteUsuario"> Deletar <i class="fas fa-trash"></i></button>
+                        <button type="submit" name="formDeleteUsuario" class="btn"> Deletar <i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>
+            
             {% endfor %}
             {% endif %}
         </tbody>
         <tbody>
+            <form action="{{ url_for('cadUsu.pdfCliente') }}" method="POST">
+                <input type="submit" value="PDF" formtarget="_blank" >
+            </form>
             {% endblock %}
 {% block footer %}{% endblock %}
