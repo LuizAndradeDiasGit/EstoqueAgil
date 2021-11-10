@@ -1,13 +1,24 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, jsonify, send_file
 #from mod_login.login import validaSessao
 from mod_cad_usu.cadUsuBD import Usuarios
 from funcoes import Funcoes
+from ClasseGeraPdf import PDF
+
 
 bp_cad_usu = Blueprint('cadUsu', __name__, url_prefix="/cadUsu", template_folder='templates')
 
 '''@bp_cad_usu.route("/")
 def rotaCadUsu():
  return render_template('formCadUsu.html')'''
+
+
+@bp_cad_usu.route('/pdfCliente', methods=['POST'])
+#@validaSessao
+def pdfCliente():
+    print('opa passou')
+    geraPdf = PDF()
+    geraPdf.pdfClientes()
+    return send_file('pdfClientes.pdf', attachment_filename='pdfClientes.pdf')
 
 @bp_cad_usu.route("/", methods=['GET', 'POST'])
 #@validaSessao
@@ -20,6 +31,25 @@ def rotaCadUsu():
     except Exception as e:
         _msg, _msg_exception = e.args
         return redirect(url_for('home.rotaHome', mensagem=_msg, mensagem_exception=_msg_exception))
+
+@bp_cad_usu.route('/verificaSeLoginExiste', methods = ['POST'])
+#@validaSessao
+def verificaSeLoginExiste():
+    usuario = Usuarios()
+    usuario.matricula = request.form['matricula']
+    try:
+        result = usuario.verificaSeLoginExiste()
+        #Verifica se achou o login no banco
+        if len(result) > 0:
+            return jsonify(login_existe = True)
+        else:
+            return jsonify(login_existe = False)
+    except Exception as e:
+        return jsonify(erro = True, mensagem_exception = str(e))
+
+
+
+
 
 @bp_cad_usu.route("/formUsuario", methods=['POST'])#@validaSessao
 def formUsuario():

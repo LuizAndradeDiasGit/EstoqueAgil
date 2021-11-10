@@ -9,7 +9,16 @@
 
 Código: <input readonly value="{{ usuario.id_usuario }}" type="text" name="id_usuario" id="id_usuario"><br><br>
 Nome Usuario: <input value="{{ usuario.nome }}" class="form-control" type="text" name="nome" id="nome" autofocus="" required><br><br>
+
+
+
 Matrícula: <input class="form-control"  value="{{ usuario.matricula }}" type="number" name="matricula" id="matricula" required><br><br>
+<div class="valid-feedback">Login OK!</div>
+<div class="invalid-feedback">Login Já existente!</div>
+
+
+
+
 CPF: <input class="form-control" value="{{ usuario.cpf }}" type="text" name="cpf" id="cpf" placeholder="000.000.000-00"  pattern=" \ d {3} \. \ d {3} \. \ d {3} - \ d {2} " required ><br><br>
 Grupo: <select name="grupo" id="grupo" required>
     <option selected {{ usuario.grupo }}>{{ usuario.grupo }}</option>
@@ -47,4 +56,37 @@ Sexo: <select name="sexo" id="sexo" required>
                 class='fas fa-save'></i> Salvar</button>
     </div>
 </form>
+    {% endblock %}
+    {% block js %}
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery.maskedinput.js') }}"></script>
+    <script>
+        // Sempre pega  url da barra de endereço
+  /* ''' $SCRIPT_ROOT = "{{ request.script_root | tojson | safe }}" ;
+        $(document).ready(function () {
+            //Verifica se o login existe ou não
+            $('#matricula').keyup(function (e) {
+                if (e.target.value.length > 0) {
+                    $.post($SCRIPT_ROOT + "{{ url_for('cadUsu.verificaSeLoginExiste') }}", {
+                        matricula: $('#matricula').val()
+                    }, function (data) {
+                        if (data.erro) {
+                            console.log(data.mensagem_exception);
+                        }
+                        else if (data.login_existe) {
+                            $('#matricula').addClass('is-invalid').removeClass('is-valid');
+                            $("button[name='salvaUsuarioDB']").attr('disabled', true);
+                        }
+                        else {
+                            $('#matricula').addClass('is-valid').removeClass('is-invalid');
+                            $("button[name='salvaUsuarioDB']").attr('disabled', false)
+                        }
+                    })
+                }
+                else {
+                    $('#matricula').removeClass('is-valid').removeClass('is-invalid');
+                }
+            })
+        })'''*/
+    </script>
     {% endblock %}

@@ -1,9 +1,9 @@
-from flask import Flask, render_template,session
+from flask import Flask, render_template, session, request
 import os
 
 from mod_home.home import bp_home
 from mod_cad_forn.cadForn import bp_cadForn
-from mod_cad_prod.cadProd import bp_cad_prod
+from mod_produto.produto import bp_produto
 from mod_cad_transp.cadTransp import bp_cad_transp
 from mod_cad_usu.cadUsu import bp_cad_usu
 from mod_envios.envios import bp_envios
@@ -18,7 +18,7 @@ app.secret_key = os.urandom(12).hex()
 
 app.register_blueprint(bp_home)
 app.register_blueprint(bp_cadForn)
-app.register_blueprint(bp_cad_prod)
+app.register_blueprint(bp_produto)
 app.register_blueprint(bp_cad_transp)
 app.register_blueprint(bp_cad_usu)
 app.register_blueprint(bp_envios)

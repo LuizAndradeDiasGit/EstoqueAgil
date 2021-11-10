@@ -2,53 +2,110 @@
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
     <title>{% block title %}{% endblock %} - AbcBolinhas</title>
+
+    <style> </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.1.0-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-5.15.4-web/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sweetalert2/dist/sweetalert2.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+
+
+
     {% block style %}
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.1.0-dist/css/bootstrap.min.css') }}">
     <style>
-    .form-control:invalid{
-    border: 1px solid #CC0000;
-}
+        .form-control:invalid {
+            border: 1px solid #CC0000;
+        }
+
+        .form-control:valid {
+            border: 1px solid #07c026;
+        }
+
+        #grid {
+            background-color: #7f8880;
+            width: 100%;
+            border-radius: 10px;
+
+        }
+
+        .container {
+           
+            width: 100%;
+            height: 100%;
+        }
+
+        #barra{
+            border-radius: 10px;
+        }
+
+        .flex-container {
+
+            background-color: #9ec007;
+            background-image: url( "{{ url_for('static', filename='fundo.jpg') }}");
+            width: 100%;
+            height: 100%;
+        }
+
+        .btn{
+            background-color: #07c026;
+            border-color: black;
+            color: black;
+        }
     </style>
-    
+
     {% endblock %}
 </head>
 
 <body>
-    {% block menu %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.1.0-dist/css/bootstrap.min.css') }}">
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand" href="#">EstoqueAgil</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar"
-            aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="textoNavbar">
-            <ul class="navbar-nav mr-auto nav-justified">
-                <li class="nav-item active">
-                    <li><a class="nav-link" href="{{ url_for('home.rotaHome') }}">Home</a></li>
-                    <li><a class="nav-link" href="{{ url_for('cadForn.rotaCadForn') }}">Fornecedores </a></li>
-                    <li><a class="nav-link" href="{{ url_for('cadTransp.rotaCadTransp') }}">Transportadoras </a></li>
-                    <li><a class="nav-link" href="{{ url_for('cadUsu.rotaCadUsu') }}">Usuários </a></li>
-                    <li><a class="nav-link" href="{{ url_for('envios.rotaEnvios') }}">Envios </a></li>
-                    <li><a class="nav-link" href="{{ url_for('pacotes.rotaPacotes') }}">Pacotes </a></li>
-                    <li> <a class="nav-link" href="{{ url_for('relatorios.rotaRelatorios') }}">Relatórios </a></li>
-                    <li><a class="nav-link" href="{{ url_for('testes.rotaTestes') }}">(Testes) </a></li>
-                </li>
-            </ul>
-           
+    <div class="flex-container">
+        {% block menu %}
+        
+     
+            <div class="container" >
+                <nav class="navbar navbar-expand-lg  navbar-dark bg-dark ">
+                    <a class="navbar-brand" href="#">EstoqueAgil</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar"
+                        aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-               
-                    
-                                    
-        </div>
-    </nav>
-</div>
+                    <!--<input type="button" id="menu" value="Clique para testar o SweetAlert!" />-->
+
+                    <div class="collapse navbar-collapse" id="textoNavbar" >
+                        <ul class="navbar-nav mr-auto nav-justified" id="barra" >
+                            <li class="nav-item active">
+                            <li><a class="nav-link" href="{{ url_for('home.rotaHome') }}">Home</a></li>
+                            <li><a class="nav-link" href="{{ url_for('cadForn.rotaCadForn') }}">Fornecedores </a></li>
+                            <li><a class="nav-link" href="{{ url_for('cadTransp.rotaCadTransp') }}">Transportadoras </a>
+                            </li>
+                            <li><a class="nav-link" href="{{ url_for('cadUsu.rotaCadUsu') }}">Usuários </a></li>
+                            <li><a class="nav-link" href="{{ url_for('produto.formListaProdutos') }}">Produtos </a></li>
+                            <li><a class="nav-link" href="{{ url_for('envios.rotaEnvios') }}">Envios </a></li>
+                            <li><a class="nav-link" href="{{ url_for('pacotes.rotaPacotes') }}">Pacotes </a></li>
+                            <li> <a class="nav-link" href="{{ url_for('relatorios.rotaRelatorios') }}">Relatórios </a>
+                            </li>
+                            <li><a class="nav-link" href="{{ url_for('testes.rotaTestes') }}">(Testes) </a></li>
+                            </li>
+                        </ul>
+
+
+
+
+
+                    </div>
+                </nav>
+            </div>
+   
+    
+
     {% endblock %}
-    <div class="container">
+    <div class="container" id="grid" >
         <div class="container-fluid mt-3">
             {% if request.args.get('mensagem'): %}
             <h3>{{ request.args.get('mensagem') }}</h3>
@@ -65,19 +122,55 @@
         <div class="col-8">&copy; Copyright 2021 by <a href="http://127.0.0.1:5000/">Luiz</a>.</div>
         {% endblock %}
     </div>
+</div>
 
-
-    {% block js %}
-    <script src="{{ url_for('static', filename='bootstrap-5.1.0-dist/js/bootstrap.min.js') }}"> </script>
-    <script src="{{ url_for('static', filename='jquery.maskedinput.js') }}"></script>
-    <script>
-        $("#cep").mask("99.999.999");
-       
-    </script>
-    
-   
-    
-    {% endblock %}
 </body>
+
+
+
+{%block js%}
+    <script src="{{ url_for('static', filename='bootstrap-5.1.0-dist/js/bootstrap.min.js') }}"> </script>
+     <script src="{{ url_for('static', filename='jquery.maskedinput.js') }}"></script>
+     <script src="{{ url_for('static', filename='sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+
+<script>
+    /*Swal.fire({
+        title: 'Teste!',
+        text: 'sweetalert2 funcionando!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+    });*/
+
+
+
+    /*$SCRIPT_ROOT = {{ request.script_root | tojson | safe }};*/
+    $(document).ready(function () {
+        //Verifica se o login existe ou não
+        $('#matricula').keyup(function (e) {
+            if (e.target.value.length > 0) {
+                $.post($SCRIPT_ROOT + "{{ url_for('cadUsu.verificaSeLoginExiste') }}", {
+                    matricula: $('#matricula').val()
+                }, function (data) {
+                    if (data.erro) {
+                        console.log(data.mensagem_exception);
+                    }
+                    else if (data.login_existe) {
+                        $('#matricula').addClass('is-invalid').removeClass('is-valid');
+                        $("button[name='salvaUsuarioDB']").attr('disabled', true);
+                    }
+                    else {
+                        $('#matricula').addClass('is-valid').removeClass('is-invalid');
+                        $("button[name='salvaUsuarioDB']").attr('disabled', false)
+                    }
+                })
+            }
+            else {
+                $('#matricula').removeClass('is-valid').removeClass('is-invalid');
+            }
+        })
+    })
+</script>
+{%endblock%}
 
 </html>

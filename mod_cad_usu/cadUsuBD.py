@@ -22,7 +22,28 @@ class Usuarios(object):
             self.sexo = sexo
             self.email = email
             self.senha = senha
-            
+
+    def verificaSeLoginExiste(self):
+        banco = None
+        c = None
+        try:
+            banco = Banco()
+            c = banco.conexao.cursor()
+            _sql = "SELECT id_usuario FROM tb_usuarios WHERE matricula = %s"
+            _sql_data = (self.matricula)
+            c.execute(_sql, _sql_data)
+            result = c.fetchall()
+            return result
+        except Exception as e:
+          raise Exception(str(e))
+        finally:
+            if c:
+
+             c.close()
+
+             if banco:
+              banco.conexao.close()
+        
             
 
     def selectALL(self):

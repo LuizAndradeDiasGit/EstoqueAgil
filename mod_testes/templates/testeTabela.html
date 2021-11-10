@@ -1,62 +1,45 @@
-{% extends "base.html" %}
-{% block title %}Cadastro de Usuários{% endblock %}
 
-{% block content %}
-<style>.form-control:invalid{
-    border: 1px solid #CC0000;
-}</style>
-<form class="needs-validation" novalidate>
-    <div class="form-row">
-      <div class="col-md-4 mb-3">
-        <label for="validationTooltip01">Primeiro nome</label>
-        <input type="text" class="form-control" id="validationTooltip01" placeholder="Nome" value="Mark" required>
-        <div class="valid-tooltip">
-          Tudo certo!
+
+<form name="addProduto" id="addProduto" method="POST"  class="row g-3">
+
+   
+
+    <div class="row">
+        <div class="col-1 form-floating mb-3">
+            <input type="text" name="id_produto" id="id_produto"  class="form-control"
+                placeholder="ID" readonly>
+            <label class="form-label" for="id_produto">Código :</label>
         </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationTooltip02">Sobrenome</label>
-        <input type="text" class="form-control" id="validationTooltip02" placeholder="Sobrenome" value="Otto" required>
-        <div class="valid-tooltip">
-          Tudo certo!
+
+        <div class="col form-floating mb-3">
+            <input type="text" name="descricao" id="descricao" class="form-control"
+                placeholder="Descrição do Produto" autofocus >
+            <label class="form-label" for="descricao">Descrição do Produto :</label>
         </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationTooltipUsername">Usuário</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
-          </div>
-          <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Usuário" aria-describedby="validationTooltipUsernamePrepend" required>
-          <div class="invalid-tooltip">
-            Por favor, escolha um usuário válido e único.
-          </div>
+
+        <div class="col-2 form-floating mb-3">
+            <input type="number" name="valor" id="valor"  class="form-control" >
+            <label class="form-label" for="valor">Valor:</label>
         </div>
-      </div>
     </div>
-    <div class="form-row">
-      <div class="col-md-6 mb-3">
-        <label for="validationTooltip03">Cidade</label>
-        <input type="text" class="form-control" id="validationTooltip03" placeholder="Cidade" required>
-        <div class="invalid-tooltip">
-          Por favor, informe uma cidade válida.
-        </div>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationTooltip04">Estado</label>
-        <input type="text" class="form-control" id="validationTooltip04" placeholder="Estado" required>
-        <div class="invalid-tooltip">
-          Por favor, informe um estado válido.
-        </div>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationTooltip05">CEP</label>
-        <input type="text" class="form-control" id="validationTooltip05" placeholder="CEP" required>
-        <div class="invalid-tooltip">
-          Por favor, informe um CEP válido.
-        </div>
-      </div>
+
+
+
+    <div class='col'>
+        <button type='submit' name='salvaProdutoDB' id='salvaProdutoDB' class="btn btn-outline-success btn-lg"><i
+                class='fas fa-save'></i> Salvar</button>
     </div>
-    <button class="btn btn-primary" type="submit">Enviar</button>
-  </form>
-    {% endblock %}
+</form>
+
+<script>
+
+    $('#addProduto').submit(alert("editar")) // fim função evento submit
+
+
+
+
+    $('#editProduto').submit(alert("editar"))
+       
+
+    
+</script>
