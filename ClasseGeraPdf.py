@@ -1,4 +1,5 @@
 from fpdf import FPDF
+from mod_cad_transp.cadTranspBD import Transportadoras
 from mod_cad_usu.cadUsuBD import  Usuarios
 from mod_produto.produtoBD import Produtos
 from datetime import datetime
@@ -116,3 +117,51 @@ class PDF(FPDF):
                 pdf.ln(5)      
                 # baixa o relatório criado
         pdf.output('pdfProdutos.pdf')
+
+
+    def pdfTransportadoras(self):
+        pdf = PDF('P', 'mm', 'A4') # L paisagem, P retrato
+        pdf.set_author("Luiz")
+        pdf.set_title('Transportadoras')
+        pdf.alias_nb_pages() # mostra o numero da pagina no rodapé
+        pdf.add_page()
+        # mostra o cabeçalho
+        pdf.set_font('arial', 'b', 12)
+        pdf.cell(190, 5, 'Transportadoras', 0, 1, 'C', 0)
+        pdf.set_font('arial', '', 6)
+        pdf.cell(190, 4, "Emitido em: " + str(datetime.now()), 0, 1, 'R')
+        pdf.ln(5)
+        # monta tabela para mostrar os dados
+        pdf.set_font('arial', 'B', 8)
+        pdf.cell(10, 5, 'ID', 0, 0, 'L')
+        pdf.cell(30, 5, 'Nome', 0, 0, 'L')
+        pdf.cell(20, 5, 'Razão Social', 0, 0, 'L')
+        pdf.cell(30, 5, 'CNPJ', 0, 0, 'L')
+        pdf.cell(20, 5, 'CEP', 0, 0, 'L')
+        pdf.cell(20, 5, 'Rua', 0, 0, 'L')
+        pdf.cell(10, 5, 'Nº', 0, 0, 'L')
+        pdf.cell(30, 5, 'E-Mail', 0, 0, 'L')
+        pdf.cell(30, 5, 'Telefone', 0, 0, 'L')
+        
+        pdf.ln(5)
+       
+     
+        # busca e mostra todos os Transportadoras
+        pdf.set_font('arial', '', 8)
+        transp = Transportadoras()
+        res = transp.selectALL()
+        if res:
+            for row in res:
+                pdf.cell(10, 5, str(row[0]), 0, 0, 'L')
+                pdf.cell(30, 5, str(row[1]), 0, 0, 'L')
+                pdf.cell(20, 5, str(row[2]), 0, 0, 'L')
+                pdf.cell(30, 5, str(row[3]), 0, 0, 'L')
+                pdf.cell(20, 5, str(row[4]), 0, 0, 'L')
+                pdf.cell(20, 5, str(row[5]), 0, 0, 'L')
+                pdf.cell(10, 5, str(row[6]), 0, 0, 'L')
+                pdf.cell(30, 5, str(row[7]), 0, 0, 'L')
+                pdf.cell(30, 5, str(row[8]), 0, 0, 'L')
+                # converte de string base64 para imagem
+                pdf.ln(5)      
+                # baixa o relatório criado
+        pdf.output('pdfTransportadoras.pdf')
